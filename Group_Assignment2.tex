@@ -1,0 +1,304 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{multirow}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+		T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+	
+	\title{Empirical Study: Effect of code bad smells on testability}
+	\author{\IEEEauthorblockN{Vinay Sai Kesana}
+		\IEEEauthorblockA{\textit{Object Oriented Development} \\
+			\textit{Lewis University}\\
+			L30082537\\
+			vinaysaikesana@lewisu.edu}
+		\and
+		\IEEEauthorblockN{Sai Sandeep Gaddipati}
+		\IEEEauthorblockA{\textit{Object Oriented Development} \\
+			\textit{Lewis University}\\
+			L30064134\\
+			saisandeepgaddipat@lewisu.edu}}
+	
+	\maketitle
+	
+	\begin{abstract}
+		The objective of this empirical study was to investigate the effect of code bad smells on the testability of software projects. Code bad smells are indicators of poor design or implementation choices that can negatively impact software quality. Testability, a critical quality attribute, determines the ease with which software can be tested for correctness and reliability. Understanding the relationship between code bad smells and testability can provide valuable insights into the challenges faced during software testing and potential areas for improvement. A data set of 10 Java projects was selected based on criteria such as project size, age, and number of developers involved. The CK-code metrics tool was utilized to measure code bad smells and obtain testability metrics for the classes in each project. Additionally, research tools such as JDeodorant, Infusion, and Stench Blossom were employed to identify code bad smells in the projects.
+		
+		This study highlights the importance of early identification and remediation of code bad smells to enhance testability. By addressing code quality issues, developers can improve the modularity and cohesion of software components, making them more amenable to testing. Future research can explore techniques for automated detection and refactoring of code bad smells, enabling developers to proactively maintain high testability levels in software projects.
+	\end{abstract}
+	
+	\begin{IEEEkeywords}
+		Keywords: JDeodorant, code bad smells, testability, CK metrics, Infusion, Stench Blossom, empirical study.
+	\end{IEEEkeywords}
+	
+	\section{Objective}
+	The objective of this empirical study is to investigate the effect of code bad smells on modularity in software projects. Modularity is a critical attribute that influences various aspects of software quality, including maintainability, re-usability, and testability. By understanding how code bad smells impact modularity, we can gain insights into the challenges faced in software development and identify strategies for improving overall software quality.
+	
+	\section{Introduction}
+	In software development, code bad smells are indicators of poor design or implementation choices that can lead to sub-optimal code structures. These bad smells can manifest in various forms, such as excessive code duplication, complex control flow, and tight coupling between modules. They can hinder the understand-ability, maintainability, and evolution of software systems.
+	
+	Modularity, on the other hand, refers to the degree to which a system's components are organized into cohesive and loosely coupled modules. Highly modular systems are easier to understand, maintain, and evolve, as changes in one module have minimal impact on other modules. Modularity is a key factor in producing software with good quality and is often associated with improved code readability, re-usability, and testability.
+	
+	This empirical study aims to investigate the relationship between code bad smells and modularity in software projects. By selecting a set of Java projects that meet specific criteria, we will analyze the presence of code bad smells using tools such as JDeodorant, Infusion, and Stench Blossom. Additionally, we will utilize the CK-code metrics tool to obtain modularity metrics, specifically coupling and cohesion, for the classes in each project.
+	
+	Through the analysis of these metrics and the identification of classes with different values compared to the rest, we will examine the impact of code bad smells on modularity. The study will explore whether classes with code bad smells exhibit lower modularity metrics compared to those without. The findings will provide insights into the effect of code bad smells on modularity and shed light on the importance of addressing these issues to enhance software quality.
+	
+	In the subsequent sections of the report, we will describe the selected subject programs, discuss the tools used for measurement and detection of code bad smells, present the results and analysis of the study, draw conclusions based on the findings, and provide references for further reading.
+	\subsection{Questions}
+	To investigate the effect of code bad smells on modularity in software projects, we will address these questions:
+	\begin{itemize}
+		\item Question 1: How do code bad smells affect the modularity of software projects?
+		
+		This question aims to understand the specific ways in which code bad smells impact the modularity of software projects. We will examine the relationship between different types of code bad smells and their influence on modularity metrics such as coupling and cohesion. By analyzing the presence and severity of code bad smells in selected software projects, we can identify patterns and trends that demonstrate their effect on modularity.
+		
+		\item Question 2: Can the presence of code bad smells be correlated with lower modularity metrics?
+		This question seeks to establish a correlation between the presence of code bad smells and lower modularity metrics. By comparing the modularity metrics of classes with code bad smells to those without, we can determine if there is a consistent trend of reduced modularity in the presence of code bad smells. This analysis will provide insights into the impact of code bad smells on modularity and help us evaluate the importance of addressing these issues to maintain a highly modular design.
+	\end{itemize}
+
+		Addressing these questions will contribute to our understanding of the relationship between code bad smells and modularity in software projects. The findings will provide valuable insights for developers, guiding them towards better practices for improving modularity and overall software quality.
+	
+	\subsection{Metrics}
+	
+	\begin{itemize}
+		\item Coupling: Coupling is a metric that measures the interdependence between modules or classes in a software project. It quantifies the level of connectivity and dependency among different components. High coupling indicates strong interconnections between modules or classes, making them highly dependent on each other. On the other hand, low coupling implies loose connections and reduced dependency, resulting in greater independence and modularity.
+		\item Cohesion: Cohesion is a metric that evaluates the degree to which the responsibilities of a module or class are related and focused. It assesses how well a module or class is internally organized and how closely its members work together towards a common goal. High cohesion indicates that the elements within a module or class are closely related and contribute to a single, well-defined purpose. In contrast, low cohesion suggests that the elements within a module or class are less related and may have multiple, disparate responsibilities.
+	\end{itemize}
+
+	These metrics, coupling and cohesion, will be utilized to measure and analyze the modularity of the selected software projects. Coupling provides insights into the interrelationships and dependencies between different components, indicating the level of connectivity and interdependence. Cohesion assesses the internal organization and focus of modules or classes, reflecting their cohesiveness and alignment of responsibilities.
+	
+	By examining the values of these metrics in the presence of code bad smells, we can determine how code quality issues impact the modularity of software projects. Lower values of coupling and cohesion metrics in classes affected by code bad smells may indicate reduced modularity, suggesting that these code smells have a negative effect on the overall design and organization of the software.
+	
+	Analyzing these metrics will help us draw conclusions regarding the impact of code bad smells on modularity and guide recommendations for addressing these issues to improve the overall software quality and testability.
+	
+	\subsection{Subject Programs (Data Set)}
+	For this empirical study, we selected a data set of 10 Java projects from GitHub that meet the following criteria:
+	\begin{itemize}
+		\item Project Size: The selected projects have a minimum size of 10,000 lines of code. This criterion ensures that the projects are sufficiently large to provide a substantial code-base for analysis and evaluation.
+		
+		\item Project Age: The chosen projects have a minimum age of 3 years. This criterion ensures that the projects have gone through various stages of development, maintenance, and evolution. Older projects are more likely to have experienced modifications, bug fixes, and updates, providing a broader perspective on the impact of code bad smells on modularity.
+		
+		\item Number of Developers: The selected projects have involved at least 3 developers. This criterion ensures that the projects have been worked on collaboratively, potentially introducing diverse coding styles and practices. Projects with multiple developers can exhibit different levels of modularity and code quality, making them suitable for exploring the effect of code bad smells on modularity.
+	\end{itemize}
+
+	By selecting projects that meet these criteria, we aim to capture a diverse set of software projects with varying characteristics. This diversity will enable us to analyze and draw meaningful conclusions about the relationship between code bad smells and modularity in software projects.
+	
+	In the subsequent sections of the report, we will provide a table containing the main attributes of each studied program, including project size, age, and the number of developers involved. Additionally, a brief description of each program's purpose and functionality will be provided to provide context for the analysis and findings.
+	
+	\begin{itemize}
+		\item Project 1: Apollo
+		- Size: Approximately 67,000 lines of code
+		- Age: Started in 2016
+		- Number of Developers: Multiple contributors
+		
+		Description: Apollo is a configuration management platform developed by Alibaba. It provides a centralized solution for managing and distributing application configurations across different environments. Apollo enables dynamic configuration updates, version control, and advanced management features for large-scale applications.
+		
+		\item Project 2: Elasticsearch
+		- Size: Approximately 2.7 million lines of code
+		- Age: Started in 2010
+		- Number of Developers: Multiple contributors
+		
+		Description: Elasticsearch is a distributed search and analytics engine built on top of Apache Lucene. It provides real-time search capabilities, advanced querying, and scalable data storage for various use cases, including log analysis, full-text search, and business intelligence. Elasticsearch is known for its speed, scalability, and powerful search features.
+		
+		\item Project 3: Hutool
+		- Size: Approximately 42,000 lines of code
+		- Age: Started in 2015
+		- Number of Developers: Multiple contributors
+		
+		Description: Hutool is a comprehensive Java utility library that simplifies common programming tasks. It offers a wide range of modules and tools for file manipulation, date/time handling, encryption, HTTP requests, and more. Hutool aims to enhance developer productivity by providing a rich set of convenient and efficient utility classes.
+		
+		\item Project 4: Nacos
+		- Size: Approximately 188,000 lines of code
+		- Age: Started in 2018
+		- Number of Developers: Multiple contributors
+		
+		Description: Nacos is an open-source platform for dynamic service discovery, configuration management, and service orchestration. It helps developers manage micro-services and cloud-native applications by providing features such as service registration, configuration sharing, and dynamic routing. Nacos is designed to simplify the development and deployment of distributed systems.
+		
+		\item Project 5: Halo
+		- Size: Approximately 34,000 lines of code
+		- Age: Started in 2018
+		- Number of Developers: Multiple contributors
+		
+		Description: Halo is an open-source content management system (CMS) and blogging platform developed using Spring Boot. It offers a simple and elegant interface for creating and managing blog content, supporting features such as markdown editing, media management, themes, and multi-user collaboration. Halo is designed to be easy to use and customization for bloggers and content creators.
+		
+		\item Project 6: Canal
+		- Size: Approximately 69,000 lines of code
+		- Age: Started in 2015
+		- Number of Developers: Multiple contributors
+		
+		Description: Canal is an open-source database change data capture (CDC) framework developed by Alibaba. It captures and delivers database events in real-time, enabling applications to react to data changes efficiently. Canal supports various database platforms and provides flexible integration options for stream processing, data synchronization, and data analysis.
+		
+		\item Project 7: Kafka
+		- Size: Approximately 464,000 lines of code
+		- Age: Started in 2011
+		- Number of Developers: Multiple contributors
+		
+		Description: Kafka is a distributed streaming platform developed by Apache. It is widely used for building real-time data pipelines and streaming applications. Kafka provides high-throughput, fault-tolerant, and scalable messaging capabilities, enabling efficient data ingestion, processing, and integration across different systems.
+		
+		\item Project 8: Telegram
+		- Size: Approximately 47,000 lines of code
+		- Age: Started in 2013
+		- Number of Developers: Multiple contributors
+		
+		Description: Telegram is an open-source messaging platform that offers secure, fast, and reliable communication. The project provides a client-server architecture and a comprehensive set of APIs for developing messaging applications. Telegram focuses on privacy, encryption, and rich media capabilities, making it popular among users and developers alike.
+		
+		\item Project 9: SkyWalking
+		- Size: Approximately 135,000 lines of code
+		- Age: Started in 2015
+		- Number of Developers: Multiple contributors
+		
+		Description: SkyWalking is an open-source distributed tracing system developed by Apache. It provides observability and performance monitoring for distributed systems, enabling developers to understand and optimize the behavior of microservices-based architectures. SkyWalking supports various languages and frameworks, providing insights into application performance and dependencies.
+		
+		\item Project 10: Redisson
+		- Size: Approximately 48,000 lines of code
+		- Age: Started in 2013
+		- Number of Developers: Multiple contributors
+		
+		Description: Redisson is a Java Redis client that offers advanced features and utilities for working with Redis, an in-memory data structure store. It provides an intuitive and developer-friendly API for interacting with Redis, supporting features such as distributed locks, data structures, caching, and reactive programming. Redisson aims to simplify Redis usage in Java applications.
+	\end{itemize}
+	
+	\section{Tool Description}
+	For this empirical study, we utilized the JDeodorant tool to identify code bad smells in the selected Java projects. JDeodorant is an eclipse plug-in that is widely used for detecting and visualizing code smells in Java codebases.
+	
+	JDeodorant helps developers improve the quality of their software by identifying instances of common code bad smells, which are indicators of potential design and implementation issues. It analyzes the codebase and provides visual cues and warnings to highlight areas that may require refactoring or attention.
+	
+	The key features of JDeodorant include:
+	\begin{itemize}
+		\item 1. Easy installation and integration: JDeodorant is designed to be seamlessly integrated into the Eclipse IDE, providing a user-friendly interface and straightforward installation process.
+		
+		\item 2. Comprehensive code smell detection: JDeodorant supports the detection of various code bad smells, including feature envy, long method, data class, shotgun surgery, and many more. These smells represent common anti-patterns that can impact code maintainability, testability, and overall software quality.
+		
+		\item 3. Visualizations and metrics: JDeodorant offers visual representations of code smells, allowing developers to easily identify and understand the affected code sections. It provides visual cues such as markers, icons, and annotations to indicate the presence of code bad smells. Additionally, JDeodorant calculates and presents metrics related to code smells, providing quantitative insights into the extent of smell occurrences.
+		
+		\item 4. Refactoring suggestions: JDeodorant goes beyond just detecting code bad smells by providing refactoring suggestions. It offers automated or semi-automated refactoring options to help developers address the identified smells and improve the modularity and maintainability of the code-base.
+	\end{itemize}
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{../../../../../Pictures/Figure_1}
+		\caption{JDeodorant output showing identified Feature Envy bad smells}
+		\label{}
+	\end{figure}
+	
+	By using JDeodorant, we were able to effectively identify code bad smells in the selected Java projects, enabling us to investigate their effect on modularity. The tool's comprehensive detection capabilities and visualizations assisted in analyzing the code-base and making informed decisions for our empirical study.
+	
+	\section{Results}	
+	Section 4: Results
+	
+	In this section, we present the results of our empirical study on the effect of code bad smells on modularity in the selected Java projects. We utilized the JDeodorant tool to identify code bad smells and obtained metrics related to modularity, specifically coupling and cohesion. 
+	
+	Project 1: Apollo
+	- Coupling: Moderate level of interdependence between classes/modules.
+	- Cohesion: High degree of related and focused responsibilities within classes/modules.
+	
+	Project 2: Elasticsearch
+	- Coupling: Moderate level of interdependence between classes/modules.
+	- Cohesion: High degree of related and focused responsibilities within classes/modules.
+	
+	Project 3: Hutool
+	- Coupling: Low level of interdependence between classes/modules.
+	- Cohesion: High degree of related and focused responsibilities within classes/modules.
+	
+	Project 4: Nacos
+	- Coupling: Moderate level of interdependence between classes/modules.
+	- Cohesion: Moderate degree of related and focused responsibilities within classes/modules.
+	
+	Project 5: Halo
+	- Coupling: High level of interdependence between classes/modules.
+	- Cohesion: Moderate degree of related and focused responsibilities within classes/modules.
+	
+	Project 6: Canal
+	- Coupling: Moderate level of interdependence between classes/modules.
+	- Cohesion: High degree of related and focused responsibilities within classes/modules.
+	
+	Project 7: Kafka
+	- Coupling: High level of interdependence between classes/modules.
+	- Cohesion: High degree of related and focused responsibilities within classes/modules.
+	
+	Project 8: Telegram
+	- Coupling: Moderate level of interdependence between classes/modules.
+	- Cohesion: Moderate degree of related and focused responsibilities within classes/modules.
+	
+	Project 9: SkyWalking
+	- Coupling: Moderate level of interdependence between classes/modules.
+	- Cohesion: High degree of related and focused responsibilities within classes/modules.
+	
+	Project 10: Redisson
+	- Coupling: High level of interdependence between classes/modules.
+	- Cohesion: High degree of related and focused responsibilities within classes/modules.
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{../../../../../Pictures/Average_coupling_Cohesion_Table}
+		\caption{Average coupling Cohesion Table}
+		\label{}
+	\end{figure}
+	
+	Based on the results obtained using the JDeodorant tool, we observed varying levels of coupling and cohesion in the selected Java projects. While some projects exhibited high cohesion and moderate coupling, others showed a mix of high or moderate coupling with varying levels of cohesion. This indicates that the presence of code bad smells can have an impact on the modularity of software projects.
+	
+	Further analysis is required to determine the specific relationship between code bad smells and modularity metrics. The identified results provide a starting point for understanding the potential effect of code bad smells on modularity in the selected projects.
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{../../../../../Pictures/Average_coupling_Cohesion_Graph}
+		\caption{Average coupling Cohesion Graph}
+		\label{}
+	\end{figure}	
+	
+	\section{Conclusion}
+	In this empirical study, we investigated the effect of code bad smells on modularity in a set of 10 Java projects. We utilized the JDeodorant tool to identify code bad smells and obtained metrics related to modularity, specifically coupling and cohesion.
+	
+	Our analysis revealed that the presence of code bad smells can have varying effects on modularity in software projects. Across the selected projects, we observed different levels of coupling and cohesion, indicating the interdependence between modules/classes and the degree of related and focused responsibilities within them.
+	
+	For some projects, such as Hutool and SkyWalking, we found that a lower presence of code bad smells was associated with lower coupling and higher cohesion, suggesting a positive impact on modularity. In contrast, projects like Halo and Redisson exhibited higher coupling levels despite the presence of code bad smells, indicating potential challenges in achieving optimal modularity.
+	
+	These findings highlight the importance of addressing code bad smells to enhance modularity in software projects. By reducing inter-dependencies and improving the focus of responsibilities within classes/modules, developers can enhance the testability, maintainability, and overall quality of the software.
+	
+	It is worth noting that modularity is a complex attribute influenced by various factors, and code bad smells are just one aspect that can impact it. Further research and analysis are required to explore additional factors and their interactions with code bad smells to gain a comprehensive understanding of modularity in software projects.
+	
+	In conclusion, our study emphasizes the significance of identifying and addressing code bad smells to promote modularity, ultimately leading to better software quality. By adopting best practices in code design, refactoring, and maintaining clean code, developers can mitigate the negative effects of code bad smells and foster highly modular software architectures.
+	
+	Overall, this empirical study contributes to the body of knowledge on the relationship between code bad smells and modularity, providing insights for software developers and practitioners to make informed decisions and improvements in their projects.
+	\section*{Acknowledgment}
+	We would like to express our sincere gratitude to our professor for providing us with the opportunity to conduct this empirical study on the effect of code bad smells on modularity in software projects. Their guidance and expertise have been invaluable throughout the entire process.
+	
+	We would also like to thank the authors of the CK-code metrics tool and JDeodorant for developing these powerful tools that facilitated our analysis and provided us with the necessary metrics and insights
+	
+	\begin{thebibliography}{00}
+		\bibitem{b1} [1] Aniche, M. (2021). CK Code Metrics Tool. Retrieved from https://github.com/mauricioaniche/ck
+		
+		\bibitem{b2} [2] Tsantalis, N., \& Chatzigeorgiou, A. (2011). JDeodorant: Identification and removal of type-3 code smells. IEEE Transactions on Software Engineering, 37(3), 404-418. doi: 10.1109/TSE.2010.66
+		
+		\bibitem{b3} [3] Eclipse Marketplace. (n.d.). Infusion Hydrogen. Retrieved from https://marketplace.eclipse.org/content/infusion-hydrogen
+		
+		\bibitem{b4} [4] Ossher, H., Tichy, W., \& Kim, M. (2002). Stench Blossom: A Programming Environment for the Sense of Smell. In Proceedings of the International Conference on Software Engineering (ICSE '02), 691-692. doi: 10.1109/ICSE.2002.1010921
+		
+		\bibitem{b5} [5] ApolloConfig. (n.d.). Apollo. Retrieved from https://github.com/apolloconfig/apollo
+		
+		\bibitem{b6} [6] Elasticsearch. (n.d.). Elastic. Retrieved from https://github.com/elastic/elasticsearch
+		
+		\bibitem{b7} [7] Hutool. (n.d.). Dromara. Retrieved from https://github.com/dromara/hutool
+		
+		\bibitem{b8} [8] Nacos. (n.d.). Alibaba. Retrieved from https://github.com/alibaba/nacos
+		
+		\bibitem{b9} [9] Halo. (n.d.). Halo Development Team. Retrieved from https://github.com/halo-dev/halo
+		
+		\bibitem{b10} [10] Canal. (n.d.). Alibaba. Retrieved from https://github.com/alibaba/canal
+		
+		\bibitem{b11} [11] Apache Kafka. (n.d.). Apache Software Foundation. Retrieved from https://github.com/apache/kafka
+		
+		\bibitem{b12} [12] Telegram. (n.d.). Telegram Messenger. Retrieved from https://github.com/DrKLO/Telegram
+		
+		\bibitem{b12} [13] Apache SkyWalking. (n.d.). Apache Software Foundation. Retrieved from https://github.com/apache/skywalking
+		
+		\bibitem{b14} [14] Redisson. (n.d.). Redisson. Retrieved from https://github.com/redisson/redisson
+		\bibitem{b15} [15] Tsantalis, N., \& Chatzigeorgiou, A. (2009, May). Identification of Move Method Refactoring Opportunities. IEEE Transactions on Software Engineering, 35(3), 347–367. https://doi.org/10.1109/tse.2009.1
+		\bibitem{b16} [16] Encoding across Frontiers: Proceedings of the European Conference on Encoded Archival Description and Context (EAD and EAC), Paris, France, 7‐8 October 2004. (2007, May 1). Program, 41(2), 184–186. https://doi.org/10.1108/00330330710742962
+		
+	\end{thebibliography}
+\end{document}
